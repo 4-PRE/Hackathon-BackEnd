@@ -1,5 +1,7 @@
 package com.example.hackathon2022.domain.job.presentation;
 
+
+import com.example.hackathon2022.global.infra.job.JobInfraService;
 import com.example.hackathon2022.domain.job.presentation.dto.response.JobDetailResponseDto;
 import com.example.hackathon2022.domain.job.service.JobService;
 import com.example.hackathon2022.global.response.ResponseService;
@@ -11,7 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/jobs")
 public class JobController {
+
+    private final JobInfraService jobInfraService;
+
+    @GetMapping("/update")
+    public String update() {
+        jobInfraService.updateAll();
+        return "Finished";
+    }
 
     private final JobService jobService;
     private final ResponseService responseService;

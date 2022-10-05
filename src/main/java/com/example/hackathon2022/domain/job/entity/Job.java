@@ -1,14 +1,12 @@
 package com.example.hackathon2022.domain.job.entity;
 
 import com.example.hackathon2022.domain.job.type.Region;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +14,7 @@ import java.time.LocalDate;
 @Entity
 public class Job {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String companyName;
@@ -37,4 +35,8 @@ public class Job {
 
     @OneToOne(mappedBy = "job")
     private JobDetail detail;
+
+    public void addDetail(JobDetail jobDetail) {
+        this.detail = jobDetail;
+    }
 }
