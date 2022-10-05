@@ -20,10 +20,14 @@ public class JobDetailResponseDto {
     private Integer work_start_hour;
     private Integer work_end_hour;
     private String age;
+<<<<<<< Updated upstream
     private String arrange;
     private String description;
     private String requireNumber;
     private String requirement;
+=======
+    private Integer requireNumber;
+>>>>>>> Stashed changes
     private String region;
     private String address;
     private Integer salary;
