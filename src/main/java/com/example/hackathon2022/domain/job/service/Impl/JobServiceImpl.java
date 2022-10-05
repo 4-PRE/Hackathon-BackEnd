@@ -26,9 +26,9 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDetailResponseDto jobDetail(Long job_id) {
+    public JobDetailResponseDto jobDetail(Long jobId) {
 
-        Job job = jobRepository.findById(job_id).orElseThrow(() -> new JobNotFoundException(HttpStatus.NOT_FOUND, "일자리를 찾을 수 없습니다."));
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException(HttpStatus.NOT_FOUND, "일자리를 찾을 수 없습니다."));
 
         JobDetail jobDetail = jobDetailRepository.findById(job.getId()).orElseThrow(() -> new JobDetailNotFoundException(HttpStatus.NOT_FOUND, "일자리 상세정보를 찾을 수 없습니다."));
 
