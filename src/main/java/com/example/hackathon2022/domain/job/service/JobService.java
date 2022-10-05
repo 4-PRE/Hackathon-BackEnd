@@ -5,7 +5,6 @@ import com.example.hackathon2022.domain.job.presentation.dto.response.JobListRes
 
 public interface JobService {
 
-    JobListResponseDto jobList();
-
+    JobListResponseDto jobList(String region, Integer page, Integer size);
     JobDetailResponseDto jobDetail(Long jobId);
 }
