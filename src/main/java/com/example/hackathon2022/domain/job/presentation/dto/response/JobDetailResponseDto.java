@@ -23,6 +23,7 @@ public class JobDetailResponseDto {
     private String arrange;
     private String description;
     private String requireNumber;
+    private String requirement;
     private String region;
     private String address;
     private Integer salary;

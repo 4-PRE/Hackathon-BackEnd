@@ -40,6 +40,7 @@ public class JobServiceImpl implements JobService {
                 .work_end_hour(jobDetail.getWorkEndHour())
                 .age(jobDetail.getAge())
                 .requireNumber(String.format("%d명", job.getRequireNumber()))
+                .requirement(jobDetail.getRequirement())
                 .region(job.getRegion().getKoreanName())
                 .address(jobDetail.getAddress())
                 .salary(job.getSalary())
