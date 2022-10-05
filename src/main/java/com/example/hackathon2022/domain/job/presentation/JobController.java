@@ -7,14 +7,12 @@ import com.example.hackathon2022.domain.job.service.JobService;
 import com.example.hackathon2022.global.response.ResponseService;
 import com.example.hackathon2022.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/jobs")
+@CrossOrigin("http://localhost:3000")
 public class JobController {
 
     private final JobInfraService jobInfraService;

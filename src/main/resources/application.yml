@@ -16,6 +16,6 @@ feign:
       default:
         logger-level: full
 
-#logging:
-  #level:
-    #root: debug
+logging:
+  level:
+    root: debug
