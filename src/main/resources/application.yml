@@ -7,3 +7,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+infra:
+  job:
+    key: ${JOB_API_KEY}
+feign:
+  client:
+    config:
+      default:
+        logger-level: full
+
+#logging:
+  #level:
+    #root: debug
