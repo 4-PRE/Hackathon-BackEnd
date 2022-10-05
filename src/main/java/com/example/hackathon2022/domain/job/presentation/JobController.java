@@ -9,6 +9,7 @@ import com.example.hackathon2022.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,15 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobController {
 
     private final JobInfraService jobInfraService;
+    private final JobService jobService;
+    private final ResponseService responseService;
 
     @GetMapping("/update")
     public String update() {
         jobInfraService.updateAll();
         return "Finished";
     }
-
-    private final JobService jobService;
-    private final ResponseService responseService;
 
     @GetMapping("/{job_id}")
     public CommonResultResponse jobDetail(@PathVariable(name = "job_id") Long job_id) {

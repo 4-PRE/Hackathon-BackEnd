@@ -1,40 +1,29 @@
 package com.example.hackathon2022.domain.job.service.Impl;
 
-<<<<<<< Updated upstream
 import com.example.hackathon2022.domain.job.presentation.dto.response.JobDetailResponseDto;
 import com.example.hackathon2022.domain.job.presentation.dto.response.JobListResponseDto;
 import com.example.hackathon2022.domain.job.service.JobService;
 import lombok.RequiredArgsConstructor;
-=======
 import com.example.hackathon2022.domain.job.entity.Job;
 import com.example.hackathon2022.domain.job.entity.JobDetail;
 import com.example.hackathon2022.domain.job.exception.JobDetailNotFoundException;
 import com.example.hackathon2022.domain.job.exception.JobNotFoundException;
-import com.example.hackathon2022.domain.job.presentation.dto.response.JobDetailResponseDto;
 import com.example.hackathon2022.domain.job.repository.JobDetailRepository;
 import com.example.hackathon2022.domain.job.repository.JobRepository;
-import com.example.hackathon2022.domain.job.service.JobService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
->>>>>>> Stashed changes
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class JobServiceImpl implements JobService {
 
-<<<<<<< Updated upstream
+    private final JobRepository jobRepository;
+    private final JobDetailRepository jobDetailRepository;
+
     @Override
     public JobListResponseDto jobList() {
         return null;
     }
-
-    @Override
-    public JobDetailResponseDto jobDetail(Long job_id) {
-        return null;
-=======
-    private final JobRepository jobRepository;
-    private final JobDetailRepository jobDetailRepository;
 
     @Override
     public JobDetailResponseDto jobDetail(Long job_id) {
@@ -56,6 +45,5 @@ public class JobServiceImpl implements JobService {
                 .salary(job.getSalary())
                 .telephone(job.getTelephone())
                 .build();
->>>>>>> Stashed changes
     }
 }

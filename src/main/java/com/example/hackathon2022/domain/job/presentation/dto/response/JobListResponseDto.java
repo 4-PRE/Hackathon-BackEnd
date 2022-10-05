@@ -1,8 +1,5 @@
 package com.example.hackathon2022.domain.job.presentation.dto.response;
 
-<<<<<<< Updated upstream
-
-=======
 import com.example.hackathon2022.domain.job.type.Region;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +23,4 @@ public class JobListResponseDto {
     private String regionDetail;
     private Integer salary;
     private String telephone;
->>>>>>> Stashed changes
-
 }
