@@ -19,7 +19,7 @@ public class JobListResponseDto {
     private LocalDate start_date;
     private LocalDate end_date;
     private Integer requireNumber;
-    private Region region;
+    private String region;
     private String regionDetail;
     private Integer salary;
     private String telephone;

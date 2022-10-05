@@ -20,8 +20,10 @@ public class JobDetailResponseDto {
     private Integer work_start_hour;
     private Integer work_end_hour;
     private String age;
+    private String arrange;
+    private String description;
     private String requireNumber;
-    private Region region;
+    private String region;
     private String address;
     private Integer salary;
     private String telephone;

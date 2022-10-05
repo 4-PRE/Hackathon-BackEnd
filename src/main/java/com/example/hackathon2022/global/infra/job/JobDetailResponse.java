@@ -29,6 +29,8 @@ public class JobDetailResponse {
         private String license;
         private String projTime;
         private String recuAgeNm;
+        private String content;
+        private String arrange;
     }
 
     private Body body;

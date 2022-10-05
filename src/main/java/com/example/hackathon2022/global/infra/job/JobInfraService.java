@@ -56,6 +56,8 @@ public class JobInfraService {
                         .address(detail.getAddr())
                         .age(detail.getRecuAgeNm())
                         .requirement(detail.getLicense())
+                        .arrange(detail.getArrange())
+                        .description(detail.getContent())
                         .workStartHour(Integer.parseInt(detail.getProjTime().split(" ~ ")[0]))
                         .workEndHour(Integer.parseInt(detail.getProjTime().split(" ~ ")[1]))
                         .build();

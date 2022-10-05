@@ -29,4 +29,6 @@ public class JobDetail {
     private String requirement;
 
     private String address;
+    private String arrange;
+    private String description;
 }
