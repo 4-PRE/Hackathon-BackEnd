@@ -7,5 +7,5 @@ public interface JobService {
 
     JobListResponseDto jobList();
 
-    JobDetailResponseDto jobDetail(Long job_id);
+    JobDetailResponseDto jobDetail(Long jobId);
 }

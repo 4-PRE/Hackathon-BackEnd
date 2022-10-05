@@ -28,8 +28,8 @@ public class JobController {
     }
 
     @GetMapping("/{job_id}")
-    public CommonResultResponse jobDetail(@PathVariable(name = "job_id") Long job_id) {
-        JobDetailResponseDto result = jobService.jobDetail(job_id);
+    public CommonResultResponse jobDetail(@PathVariable(name = "job_id") Long jobId) {
+        JobDetailResponseDto result = jobService.jobDetail(jobId);
         return responseService.getSingleResultResponse(result);
     }
 }
