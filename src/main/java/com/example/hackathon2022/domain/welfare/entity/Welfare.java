@@ -27,4 +27,7 @@ public class Welfare {
     private String detailLink;
 
     private String keywords;
+
+    private Integer targetFlagForSearch;
+    private Integer benefitFlagForSearch;
 }

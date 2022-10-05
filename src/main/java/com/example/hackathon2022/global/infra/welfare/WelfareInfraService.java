@@ -62,12 +62,38 @@ public class WelfareInfraService {
             for(int i = 0; i < rawList.getLength(); i++) {
                 NodeList item = rawList.item(i).getChildNodes();
 
+                Integer targetFlag = 0;
+                String keyword = getValueOfNodeList(item, "trgterIndvdlArray");
+                if(keyword != null) {
+                    if(keyword.contains("LOW_INCOME"))
+                        targetFlag |= 0b001;
+                    else if(keyword.contains("DISABLED"))
+                        targetFlag |= 0b010;
+                    else if(keyword.contains("VETERAN"))
+                        targetFlag |= 0b100;
+                }
+
+                Integer benefitFlag = 0;
+                String department = getValueOfNodeList(item, "jurMnofNm");
+                if("교육부".equals(department))
+                    targetFlag |= 0b10000;
+                else if("보건복지부".equals(department))
+                    targetFlag |= 0b01000;
+                else if("문화체육관광부".equals(department))
+                    targetFlag |= 0b00100;
+                else if("금융위원회".equals(department))
+                    targetFlag |= 0b00010;
+                else
+                    targetFlag |= 0b00001;
+
                 Welfare welfare = Welfare.builder()
-                        .keywords(getValueOfNodeList(item, "trgterIndvdlArray"))
+                        .keywords(keyword)
                         .detailLink(getValueOfNodeList(item, "servDtlLink"))
                         .summary(getValueOfNodeList(item, "servDgst"))
-                        .department(getValueOfNodeList(item, "jurMnofNm"))
+                        .department(department)
                         .division(getValueOfNodeList(item, "jurOrgNm"))
+                        .targetFlagForSearch(targetFlag)
+                        .benefitFlagForSearch(benefitFlag)
                         .build();
                 welfareList.add(welfare);
             }
