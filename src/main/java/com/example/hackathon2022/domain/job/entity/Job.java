@@ -1,6 +1,7 @@
 package com.example.hackathon2022.domain.job.entity;
 
 import com.example.hackathon2022.domain.job.type.Region;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Job {
 
     private String telephone;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "job")
     private JobDetail detail;
 
