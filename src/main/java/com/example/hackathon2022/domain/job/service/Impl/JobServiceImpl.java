@@ -96,6 +96,8 @@ public class JobServiceImpl implements JobService {
                 .address(jobDetail.getAddress())
                 .salary(job.getSalary())
                 .telephone(job.getTelephone())
+                .arrange(jobDetail.getArrange())
+                .description(jobDetail.getDescription())
                 .build();
     }
 }
