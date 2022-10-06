@@ -13,5 +13,5 @@ public class WelfareQueryResponse {
     private int page;
     private int items;
     private int pageCount;
-    private List<WelfareResponse> list;
+    private List<WelfareSimpleResponse> list;
 }

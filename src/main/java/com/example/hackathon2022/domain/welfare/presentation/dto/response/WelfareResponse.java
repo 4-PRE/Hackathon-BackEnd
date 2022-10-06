@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 @AllArgsConstructor
 public class WelfareResponse {
+    private Long id;
     private String department;
     private String division;
     private String detailLink;
