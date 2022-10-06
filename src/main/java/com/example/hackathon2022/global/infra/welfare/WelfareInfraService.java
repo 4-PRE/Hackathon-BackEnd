@@ -120,10 +120,14 @@ public class WelfareInfraService {
             Document doc = dBuilder.parse(new InputSource(new StringReader(response)));
             doc.getDocumentElement().normalize();
 
-            NodeList callListRaw = doc.getElementsByTagName("applmetList");
+            NodeList callListRaw1 = doc.getElementsByTagName("applmetList");
+            NodeList callListRaw2 = doc.getElementsByTagName("inqplCtadrList");
             List<NodeList> callList = new ArrayList<>();
-            for (int i = 0; i < callListRaw.getLength(); i++) {
-                callList.add(callListRaw.item(i).getChildNodes());
+            for (int i = 0; i < callListRaw1.getLength(); i++) {
+                callList.add(callListRaw1.item(i).getChildNodes());
+            }
+            for (int i = 0; i < callListRaw2.getLength(); i++) {
+                callList.add(callListRaw2.item(i).getChildNodes());
             }
             NodeList callNode = callList.stream()
                     .filter(it -> {

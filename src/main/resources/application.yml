@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    #show-sql: true
   jackson:
     property-naming-strategy: SNAKE_CASE
 infra:
