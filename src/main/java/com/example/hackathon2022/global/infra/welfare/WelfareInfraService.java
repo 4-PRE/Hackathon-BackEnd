@@ -65,26 +65,26 @@ public class WelfareInfraService {
                 Integer targetFlag = 0;
                 String keyword = getValueOfNodeList(item, "trgterIndvdlArray");
                 if(keyword != null) {
-                    if(keyword.contains("LOW_INCOME"))
+                    if(keyword.contains("저소득"))
                         targetFlag |= 0b001;
-                    else if(keyword.contains("DISABLED"))
+                    else if(keyword.contains("장애인"))
                         targetFlag |= 0b010;
-                    else if(keyword.contains("VETERAN"))
+                    else if(keyword.contains("보훈"))
                         targetFlag |= 0b100;
                 }
 
                 Integer benefitFlag = 0;
                 String department = getValueOfNodeList(item, "jurMnofNm");
                 if("교육부".equals(department))
-                    targetFlag |= 0b10000;
+                    benefitFlag |= 0b10000;
                 else if("보건복지부".equals(department))
-                    targetFlag |= 0b01000;
+                    benefitFlag |= 0b01000;
                 else if("문화체육관광부".equals(department))
-                    targetFlag |= 0b00100;
+                    benefitFlag |= 0b00100;
                 else if("금융위원회".equals(department))
-                    targetFlag |= 0b00010;
+                    benefitFlag |= 0b00010;
                 else
-                    targetFlag |= 0b00001;
+                    benefitFlag |= 0b00001;
 
                 Welfare welfare = Welfare.builder()
                         .keywords(keyword)
