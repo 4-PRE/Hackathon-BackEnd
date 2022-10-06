@@ -7,15 +7,20 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    #show-sql: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 infra:
   job:
     key: ${JOB_API_KEY}
+  welfare:
+    key: ${WELFARE_API_KEY}
 feign:
   client:
     config:
       default:
         logger-level: full
 
-logging:
-  level:
-    root: debug
+#logging:
+#  level:
+#    root: debug
