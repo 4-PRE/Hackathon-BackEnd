@@ -92,7 +92,6 @@ public class JobServiceImpl implements JobService {
                 .requireNumber(String.format("%d명", job.getRequireNumber()))
                 .requirement(jobDetail.getRequirement())
                 .region(job.getRegion().getKoreanName())
-                .region(job.getRegionDetail())
                 .address(jobDetail.getAddress())
                 .salary(job.getSalary())
                 .telephone(job.getTelephone())
