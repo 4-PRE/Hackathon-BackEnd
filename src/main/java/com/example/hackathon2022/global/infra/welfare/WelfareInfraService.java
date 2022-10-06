@@ -6,7 +6,10 @@ import com.example.hackathon2022.domain.job.repository.JobDetailRepository;
 import com.example.hackathon2022.domain.job.repository.JobRepository;
 import com.example.hackathon2022.domain.job.type.Region;
 import com.example.hackathon2022.domain.welfare.entity.Welfare;
+import com.example.hackathon2022.domain.welfare.entity.WelfareDetail;
+import com.example.hackathon2022.domain.welfare.repository.WelfareDetailRepository;
 import com.example.hackathon2022.domain.welfare.repository.WelfareRepository;
+import com.example.hackathon2022.domain.welfare.type.ContactType;
 import com.example.hackathon2022.global.infra.job.JobApiProperties;
 import com.example.hackathon2022.global.infra.job.JobDetailFeign;
 import com.example.hackathon2022.global.infra.job.JobDetailResponse;
@@ -36,7 +39,9 @@ import java.util.List;
 public class WelfareInfraService {
     private final WelfareApiProperties welfareApiProperties;
     private final WelfareListFeign welfareListFeign;
+    private final WelfareDetailFeign welfareDetailFeign;
     private final WelfareRepository welfareRepository;
+    private final WelfareDetailRepository welfareDetailRepository;
 
     private String getValueOfNodeList(NodeList list, String keyName) {
         for(int i = 0; i < list.getLength(); i++) {
@@ -94,6 +99,7 @@ public class WelfareInfraService {
                         .division(getValueOfNodeList(item, "jurOrgNm"))
                         .targetFlagForSearch(targetFlag)
                         .benefitFlagForSearch(benefitFlag)
+                        .internalId(getValueOfNodeList(item, "servId"))
                         .build();
                 welfareList.add(welfare);
             }
@@ -104,12 +110,67 @@ public class WelfareInfraService {
         return welfareList;
     }
 
+    private WelfareDetail parseDetail(Welfare welfare, String internalId) {
+        String response = welfareDetailFeign.execute(welfareApiProperties.getKey(), "D", internalId,
+                "2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
+
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(new InputSource(new StringReader(response)));
+            doc.getDocumentElement().normalize();
+
+            NodeList callListRaw = doc.getElementsByTagName("applmetList");
+            List<NodeList> callList = new ArrayList<>();
+            for (int i = 0; i < callListRaw.getLength(); i++) {
+                callList.add(callListRaw.item(i).getChildNodes());
+            }
+            NodeList callNode = callList.stream()
+                    .filter(it -> {
+                        //log.info("num: {}", getValueOfNodeList(it, "servSeCode"));
+                        return "010".equals(getValueOfNodeList(it, "servSeCode"));
+                    })
+                    .findFirst()
+                    .orElse(
+                            callList.stream()
+                                    .filter(it -> {
+                                        //log.info("num: {}", getValueOfNodeList(it, "servSeCode"));
+                                        return "070".equals(getValueOfNodeList(it, "servSeCode"));
+                                    })
+                                    .findFirst()
+                                    .orElseThrow()
+                    );
+
+            return WelfareDetail.builder()
+                    .welfare(welfare)
+                    .callMethod("010".equals(getValueOfNodeList(callNode, "servSeCode")) ? ContactType.PHONE : ContactType.OTHER)
+                    .callName(getValueOfNodeList(callNode, "servSeDetailNm"))
+                    .callNumber(getValueOfNodeList(callNode, "servSeDetailLink"))
+                    .benefitDetail(doc.getElementsByTagName("alwServCn").item(0).getTextContent())
+                    .requirementDetail(doc.getElementsByTagName("tgtrDtlCn").item(0).getTextContent())
+                    .build();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        return null;
+    }
+
     @Transactional
     public void updateAll() {
         List<Welfare> welfareList = new ArrayList<>();
         for(int i = 1; i < 6; i++)
             welfareList.addAll(parseOf(i));
 
+        List<WelfareDetail> detailsList = new ArrayList<>();
+        welfareList.forEach(it -> {
+            WelfareDetail detail = parseDetail(it, it.getInternalId());
+
+            it.setWelfareDetail(detail);
+            detailsList.add(detail);
+        });
+
         welfareRepository.saveAll(welfareList);
+        welfareDetailRepository.saveAll(detailsList);
     }
 }

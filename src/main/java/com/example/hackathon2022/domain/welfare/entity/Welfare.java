@@ -2,10 +2,7 @@ package com.example.hackathon2022.domain.welfare.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @ToString
 @Builder
@@ -30,4 +27,12 @@ public class Welfare {
 
     private Integer targetFlagForSearch;
     private Integer benefitFlagForSearch;
+
+    @OneToOne(mappedBy = "welfare")
+    private WelfareDetail welfareDetail;
+    public void setWelfareDetail(WelfareDetail welfareDetail) {
+        this.welfareDetail = welfareDetail;
+    }
+
+    private transient String internalId;
 }
