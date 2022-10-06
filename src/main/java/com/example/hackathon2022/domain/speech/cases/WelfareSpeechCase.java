@@ -75,7 +75,7 @@ public class WelfareSpeechCase implements SpeechUnit {
         List<String> answer = new ArrayList<>();
         if((filtered.contains("교육") || filtered.contains("공부")) || filtered.contains("학교"))
             answer.add("EDUCATION");
-        if((filtered.contains("의료") || filtered.contains("병원")) || filtered.contains("치료"))
+        if((filtered.contains("의료") || filtered.contains("병원")) || filtered.contains("치료") || filtered.contains("일자리") || filtered.contains("장애인"))
             answer.add("MEDICAL");
         if((filtered.contains("문화") || filtered.contains("영화")) || filtered.contains("공연"))
             answer.add("CULTURE");

@@ -33,9 +33,9 @@ public class JobInfraService {
         List<Job> jobList = new ArrayList<>();
         List<JobDetail> detailList = new ArrayList<>();
 
-        for(int i = 1; i < 2; i++) {
+        for(int i = 1; i < 10; i++) {
             jobListFeign.execute(
-                    jobApiProperties.getKey(), 100, i
+                    jobApiProperties.getKey(), 10, i
             ).getBody().getItems().forEach(it -> {
                 JobDetailResponse.Item detail = jobDetailFeign.execute(jobApiProperties.getKey(), it.getProjNo()).getBody().getItem();
                 if("완료".equals(it.getTrnStatNm())) return;
