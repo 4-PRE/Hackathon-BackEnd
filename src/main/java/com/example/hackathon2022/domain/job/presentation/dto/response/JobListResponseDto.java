@@ -13,19 +13,8 @@ import java.util.List;
 @Getter
 public class JobListResponseDto {
 
-<<<<<<< Updated upstream
-    private Long job_id;
-    private String companyName;
-    private LocalDate start_date;
-    private LocalDate end_date;
-    private Integer requireNumber;
-    private String region;
-    private String regionDetail;
-    private Integer salary;
-    private String telephone;
-=======
-    private Integer totalPage;
-    private Integer count;
-    private List<JobResponseDto> list;
->>>>>>> Stashed changes
+   private Integer count;
+   private Integer totalPage;
+   private List<JobResponseDto> list;
+
 }

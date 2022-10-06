@@ -4,18 +4,13 @@ package com.example.hackathon2022.domain.job.presentation;
 import com.example.hackathon2022.domain.job.presentation.dto.response.JobDetailResponseDto;
 import com.example.hackathon2022.domain.job.presentation.dto.response.JobListResponseDto;
 import com.example.hackathon2022.domain.job.service.JobService;
+import com.example.hackathon2022.domain.job.type.Region;
 import com.example.hackathon2022.global.infra.job.JobInfraService;
 import com.example.hackathon2022.global.response.ResponseService;
 import com.example.hackathon2022.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
-<<<<<<< Updated upstream
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
-=======
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
->>>>>>> Stashed changes
 
 @RestController
 @RequiredArgsConstructor
@@ -34,8 +29,8 @@ public class JobController {
     }
 
     @GetMapping("")
-    public CommonResultResponse jobList(@RequestParam String region, @RequestParam Integer page, @RequestParam Integer size) {
-        JobListResponseDto result = jobService.jobList(region, page, size);
+    public CommonResultResponse jobList(@RequestParam String region, @RequestParam Integer page, @RequestParam Integer size, @RequestParam(required = false) String keyword) {
+        JobListResponseDto result = jobService.jobList(region, page, size, keyword);
         return responseService.getSingleResultResponse(result);
     }
 

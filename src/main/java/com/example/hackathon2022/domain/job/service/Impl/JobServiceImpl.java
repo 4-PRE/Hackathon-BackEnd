@@ -19,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,32 +32,46 @@ public class JobServiceImpl implements JobService {
 
     @Override
     @Transactional
-    public JobListResponseDto jobList(String region, Integer page, Integer size) {
+    public JobListResponseDto jobList(String region1, Integer page, Integer size, String keyWord) {
 
         PageRequest pageRequest = PageRequest.of(page, size);
 
-        Page<Job> jobList = jobRepository.findJobByRegion(Region.fromName(region), pageRequest);
+        Region region = Region.fromName(region1);
 
-        log.info("size : " + page);
-        log.info("page size : " + pageRequest.getPageNumber());
+        Page<Job> jobList = jobRepository.findJobByRegion(region, pageRequest);
 
+        if(keyWord != null) {
+
+            log.info(region.name());
+
+            Page<Job> jobByDescription = jobRepository.findJobByDescription(region, "%"+keyWord+"%", pageRequest);
+            log.info("totalSize : " + jobByDescription.getTotalElements());
+
+             return getJobListResponseDto(jobByDescription);
+
+        }
+
+        return getJobListResponseDto(jobList);
+
+    }
+
+    private JobListResponseDto getJobListResponseDto(Page<Job> jobList) {
         return JobListResponseDto.builder()
                 .count(Math.toIntExact(jobList.getTotalElements()))
                 .totalPage(jobList.getTotalPages())
                 .list(jobList.map(job ->
-                    JobResponseDto.builder()
-                            .id(job.getId())
-                            .companyName(job.getCompanyName())
-                            .startDate(job.getStartDate())
-                            .endDate(job.getEndDate())
-                            .requireNumber(job.getRequireNumber())
-                            .region(job.getRegion().getKoreanName())
-                            .regionDetail(job.getRegionDetail())
-                            .telephone(job.getTelephone())
-                            .build()
+                        JobResponseDto.builder()
+                                .id(job.getId())
+                                .companyName(job.getCompanyName())
+                                .startDate(job.getStartDate())
+                                .endDate(job.getEndDate())
+                                .requireNumber(job.getRequireNumber())
+                                .region(job.getRegion().getKoreanName())
+                                .regionDetail(job.getRegionDetail())
+                                .telephone(job.getTelephone())
+                                .build()
                 ).toList())
                 .build();
-
     }
 
     @Override
@@ -73,14 +89,10 @@ public class JobServiceImpl implements JobService {
                 .work_start_hour(jobDetail.getWorkStartHour())
                 .work_end_hour(jobDetail.getWorkEndHour())
                 .age(jobDetail.getAge())
-<<<<<<< Updated upstream
                 .requireNumber(String.format("%d명", job.getRequireNumber()))
                 .requirement(jobDetail.getRequirement())
                 .region(job.getRegion().getKoreanName())
-=======
-                .requireNumber(job.getRequireNumber())
                 .region(job.getRegionDetail())
->>>>>>> Stashed changes
                 .address(jobDetail.getAddress())
                 .salary(job.getSalary())
                 .telephone(job.getTelephone())

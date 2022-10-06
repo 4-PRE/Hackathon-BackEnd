@@ -18,7 +18,7 @@ public class JobDetail {
     private Long id;
 
     @MapsId
-    @JoinColumn
+    @JoinColumn(name = "job_id")
     @OneToOne
     private Job job;
 
@@ -31,4 +31,5 @@ public class JobDetail {
     private String address;
     private String arrange;
     private String description;
+
 }
