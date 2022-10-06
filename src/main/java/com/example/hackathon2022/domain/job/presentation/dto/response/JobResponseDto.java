@@ -19,4 +19,5 @@ public class JobResponseDto {
     private String region;
     private String regionDetail;
     private String telephone;
+
 }
