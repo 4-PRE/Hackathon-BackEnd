@@ -26,6 +26,7 @@ public class SpeechService {
     private final ConcurrentHashMap<UUID, SpeechUnit.SpeechResult> records = new ConcurrentHashMap<>();
 
     public SpeechResponse execute(String speech, String continuousCode) {
+        log.info("speech: {}, code: {}", speech, continuousCode);
         final List<SpeechUnit> units = List.of(welfareUnit);
 
         List<Token> tokens = komoran.analyze(speech).getTokenList();
