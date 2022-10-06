@@ -8,6 +8,7 @@ import com.example.hackathon2022.domain.welfare.service.WelfareService;
 import kr.co.shineware.nlp.komoran.model.Token;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Log4j2
-@Component
+@Component("welfareCase")
+//@Primary
 @RequiredArgsConstructor
 public class WelfareSpeechCase implements SpeechUnit {
     private final WelfareService welfareService;
