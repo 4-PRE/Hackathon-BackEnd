@@ -1,7 +1,7 @@
 package com.example.hackathon2022.domain.speech.presentation;
 
 import com.example.hackathon2022.domain.speech.presentation.dto.response.SpeechResponse;
-import com.example.hackathon2022.domain.speech.service.SpeechService;
+import com.example.hackathon2022.domain.speech.presentation.dto.response.service.SpeechService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
